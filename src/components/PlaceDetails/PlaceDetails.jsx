@@ -11,13 +11,13 @@ import {
 } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import PhoneIcon from "@material-ui/icons/Phone";
-import Rating from "@material-ui/lab/Rating";
+// import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./styles";
 
 export default function PlaceDetails({ place }) {
 	const classes = useStyles();
-	console.log(place);
+	// console.log(place);
 	return (
 		<Card elevation={6}>
 			<CardMedia
@@ -45,12 +45,13 @@ export default function PlaceDetails({ place }) {
 						{place.ranking}
 					</Typography>
 				</Box>
-				{place?.awards?.map((award) => (
+				{place?.awards?.map((award, i) => (
 					<Box
 						my={1}
 						display="flex"
 						justifyContent="space-between"
-						alignItems="center">
+						alignItems="center"
+						key={i}>
 						<img src={award.images.small} alt={award.display_name} />
 						<Typography variant="subtitle2" color="textSecondary">
 							{award.display_name}
