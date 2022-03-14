@@ -21,7 +21,7 @@ const List = ({
 	rating,
 	setRating,
 }) => {
-	console.log({ childClicked });
+	// console.log({ childClicked });
 	const classes = useStyles();
 	const [elRefs, setElRefs] = useState([]);
 
@@ -62,7 +62,7 @@ const List = ({
 					</FormControl>
 					<Grid container spacing={3} className={classes.list}>
 						{places?.map((place, i) => (
-							<Grid item key={i} xs={12}>
+							<Grid ref={elRefs[i]} item key={i} xs={12}>
 								<PlaceDetails
 									place={place}
 									selected={Number(childClicked) === i}
