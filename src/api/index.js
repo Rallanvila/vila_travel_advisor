@@ -1,9 +1,6 @@
 import axios from "axios";
 
-// const URL =
-// "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary";
-
-export const getPlacesData = async (ne, sw, type) => {
+export const getPlacesData = async (type, sw, ne) => {
 	try {
 		const {
 			data: { data },
@@ -18,13 +15,11 @@ export const getPlacesData = async (ne, sw, type) => {
 				},
 				headers: {
 					"x-rapidapi-host": "travel-advisor.p.rapidapi.com",
-					"x-rapidapi-key":
-						"b08259437emsh73f96ea80105252p1ce92djsn719a5ce42bb8",
+					"x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
 				},
 			},
 		);
-		let dataWithNoAds = data.filter((d) => d.location_id !== "34618");
-		return dataWithNoAds;
+		return data;
 	} catch (error) {
 		console.log(error);
 	}
@@ -32,21 +27,20 @@ export const getPlacesData = async (ne, sw, type) => {
 
 export const getWeatherData = async (lat, lng) => {
 	try {
-		const { data } = await axios.get(
-			"https://community-open-weather-map.p.rapidapi.com/weather",
-			{
-				params: {
-					lat: lat,
-					lon: lng,
+		if (lat && lng) {
+			const { data } = await axios.get(
+				"https://community-open-weather-map.p.rapidapi.com/weather",
+				{
+					params: { lat, lon: lng },
+					headers: {
+						"x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
+						"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
+					},
 				},
-				headers: {
-					"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-					"x-rapidapi-key":
-						"b08259437emsh73f96ea80105252p1ce92djsn719a5ce42bb8",
-				},
-			},
-		);
-		return data;
+			);
+
+			return data;
+		}
 	} catch (error) {
 		console.log(error);
 	}

@@ -15,11 +15,12 @@ import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./styles";
 
-export default function PlaceDetails({ place, selected, refProp }) {
+const PlaceDetails = ({ place, selected, refProp }) => {
 	const classes = useStyles();
-
-	if (selected)
+	if (selected) {
+		console.log([refProp]);
 		refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+	}
 
 	return (
 		<Card elevation={6}>
@@ -49,18 +50,17 @@ export default function PlaceDetails({ place, selected, refProp }) {
 					</Typography>
 				</Box>
 				<Box display="flex" justifyContent="space-between">
-					<Typography variant="subtitle1">Ranking</Typography>
+					<Typography variant="subtitle1">Rating</Typography>
 					<Typography gutterBottom variant="subtitle1">
 						{place.ranking}
 					</Typography>
 				</Box>
-				{place?.awards?.map((award, i) => (
+				{place?.awards?.map((award) => (
 					<Box
 						my={1}
 						display="flex"
 						justifyContent="space-between"
-						alignItems="center"
-						key={i}>
+						alignItems="center">
 						<img src={award.images.small} alt={award.display_name} />
 						<Typography variant="subtitle2" color="textSecondary">
 							{award.display_name}
@@ -85,7 +85,7 @@ export default function PlaceDetails({ place, selected, refProp }) {
 						gutterBottom
 						variant="subtitle2"
 						color="textSecondary"
-						className={classes.subtitle}>
+						className={classes.spacing}>
 						<PhoneIcon />
 						{place.phone}
 					</Typography>
@@ -95,7 +95,7 @@ export default function PlaceDetails({ place, selected, refProp }) {
 						size="small"
 						color="primary"
 						onClick={() => window.open(place.web_url, "_blank")}>
-						Trip Advisor
+						TripAdvisor
 					</Button>
 					<Button
 						size="small"
@@ -107,4 +107,6 @@ export default function PlaceDetails({ place, selected, refProp }) {
 			</CardContent>
 		</Card>
 	);
-}
+};
+
+export default PlaceDetails;
